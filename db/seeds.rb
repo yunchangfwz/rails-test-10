@@ -19,3 +19,16 @@ User.create!([
     ])
 
 puts "==== End ===="
+
+puts "==== Create Comments ===="
+Comment.destroy_all
+  ActiveRecord::Base.connection.execute(
+    "ALTER SEQUENCE comments_id_seq RESTART WITH 1"
+  )
+Comment.create!([ 
+  { message: 'This is a first comment',
+    user_id: 1,
+  }
+])
+
+puts "==== End ===="

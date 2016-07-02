@@ -9,4 +9,8 @@ html
   body
     p.notice = notice
     p.alert = alert
+    .menu
+      ul
+        li = link_to "sign in", new_user_session_path
+        li = link_to "log out", destroy_user_session_path
     = yield
