@@ -50,7 +50,7 @@ var Comment = React.createClass({
           </div>
         </div>
         <div className="clearfix"></div>
-        <ReplyBox comment_id={this.props.comment_id} video_id={this.props.video_id} user_name={this.props.user_name} user_avatar={this.props.user_avatar}/>
+        <ReplyBox comment_id={this.props.comment_id} user_name={this.props.user_name} user_avatar={this.props.user_avatar}/>
       </div>
     )
   }

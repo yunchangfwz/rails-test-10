@@ -3,6 +3,6 @@
     h1 Comments
     .comments
       .form-wrap
-        - user_name =  nil
+        - user_name = current_user ?  current_user.email : nil
         - user_avatar_url = nil
         = react_component('CommentBox', {  pollInterval: 60000 , user_name: user_name, user_avatar: user_avatar_url })
