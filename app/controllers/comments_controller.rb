@@ -2,28 +2,32 @@ class CommentsController < ApplicationController
 
   before_action :authenticate_user!, only: [:create]
 
-  def index
+  def index;end
+
+  def all
     @comments = Comment.all
-    # @comments = Comment.where('commentable_id = ? and commentable_type = ?', commentable_id, "#{commentable_type}").root.limit(limit)
-    # render json: comment_respone.to_json(include: {replies: {methods: :user_name}}, methods: :user_name)
+    render json: @comments.to_json
   end
 
   def create
-    # comment = Comment.new(comment_params)
-    # if comment.save
-    #   render json: comment
-    # else
-    #   render json: comment.errors.full_messages, status: :unprocessable_entity 
-    # end
+    comment = Comment.new(comment_params)
+    if comment.save
+      render json: comment
+    else
+      render json: comment.errors.full_messages, status: :unprocessable_entity 
+    end
   end
 
   def replies
-    # @comments = Comment.where(parent_id: comment_id).includes(:user)
-    # render json: comment_respone.to_json
+    @comments = Comment.where(parent_id: comment_id).includes(:user)
+    render json: @comments.to_json
   end
 
   protected
-
+  def comment_id
+    params[:id]
+  end
+  
   def limit
     result = params[:limit] || 99
     return result
